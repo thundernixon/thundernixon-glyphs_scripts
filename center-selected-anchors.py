@@ -9,14 +9,9 @@ Example:
 """
 
 layer = Glyphs.font.selectedLayers[0] # current layer
-print layer
 
 for anchor in layer.anchors:
-    
     if anchor.selected == True:
-        print anchor.x
-        print layer.width
         centerXpos = layer.width/2
         anchor.x = centerXpos
-
         print(anchor.name, " moved to ", str(centerXpos))
