@@ -8,14 +8,23 @@ font = Glyphs.font
 
 font.customParameters["Use Typo Metrics"] = True
 
+caps = ["A", "Aacute", "Abreve", "Acircumflex", "Adieresis", "Agrave", "Amacron", "Aogonek", "Aring", "Aringacute", "Atilde", "AE", "AEacute", "B", "C", "Cacute", "Ccaron", "Ccedilla", "Ccircumflex", "Cdotaccent", "D", "Eth", "Dcaron", "Dcroat", "Ddotbelow", "E", "Eacute", "Ebreve", "Ecaron", "Ecircumflex", "Edieresis", "Edotaccent", "Edotbelow", "Egrave", "Emacron", "Eogonek", "Etilde", "F", "G", "Gbreve", "Gcircumflex", "Gcommaaccent", "Gdotaccent", "H", "Hbar", "Hcircumflex", "Hdotbelow", "I", "IJ", "Iacute", "Ibreve", "Icircumflex", "Idieresis", "Idotaccent", "Idotbelow", "Igrave", "Imacron", "Iogonek", "Itilde", "J", "Jcircumflex", "K", "Kcommaaccent", "L", "Lacute", "Lcaron", "Lcommaaccent", "Ldot", "Lslash", "M", "N", "Nacute", "Ncaron", "Ncommaaccent", "Ndotaccent", "Eng", "Ntilde", "O", "Oacute", "Obreve", "Ocircumflex", "Odieresis", "Odotbelow", "Ograve", "Ohungarumlaut", "Omacron", "Oogonek", "Oslash", "Oslashacute", "Otilde", "OE", "P", "Thorn", "Q", "R", "Racute", "Rcaron", "Rcommaaccent", "Rdotbelow", "S", "Sacute", "Scaron", "Scircumflex", "Sdotbelow", "Schwa", "T", "Tbar", "Tcaron", "Tdotbelow", "U", "Uacute", "Ubreve", "Ucircumflex", "Udieresis", "Udotbelow", "Ugrave", "Uhungarumlaut", "Umacron", "Uogonek", "Uring", "Utilde", "V", "W", "Wacute", "Wcircumflex", "Wdieresis", "Wgrave", "X", "Y", "Yacute", "Ycircumflex", "Ydieresis", "Ygrave", "Ytilde", "Z", "Zacute", "Zcaron", "Zdotaccent", "Zdotbelow", "uni015E", "uni0162", "uni01C4", "uni01C5", "uni01C7", "uni01C8", "uni01CA", "uni01CB", "uni01F1", "uni01F2", "uni0218", "uni021A" ]  
+lowercase = ["a", "aacute", "abreve", "acircumflex", "adieresis", "agrave", "amacron", "aogonek", "aring", "aringacute", "atilde", "ae", "aeacute", "b", "c", "cacute", "ccaron", "ccedilla", "ccircumflex", "cdotaccent", "d", "eth", "dcaron", "dcroat", "ddotbelow", "e", "eacute", "ebreve", "ecaron", "ecircumflex", "edieresis", "edotaccent", "edotbelow", "egrave", "emacron", "eogonek", "etilde", "schwa", "f", "g", "gbreve", "gcircumflex", "gcommaaccent", "gdotaccent", "h", "hbar", "hcircumflex", "hdotbelow", "i", "dotlessi", "iacute", "ibreve", "icircumflex", "idieresis", "idotbelow", "igrave", "ij", "imacron", "iogonek", "itilde", "j", "dotlessj", "jcircumflex", "k", "kcommaaccent", "kgreenlandic", "l", "lacute", "lcaron", "lcommaaccent", "ldot", "lslash", "m", "n", "nacute", "napostrophe", "ncaron", "ncommaaccent", "ndotaccent", "eng", "ntilde", "o", "oacute", "obreve", "ocircumflex", "odieresis", "odotbelow", "ograve", "ohungarumlaut", "omacron", "oogonek", "oslash", "oslashacute", "otilde", "oe", "p", "thorn", "q", "r", "racute", "rcaron", "rcommaaccent", "rdotbelow", "s", "sacute", "scaron", "scircumflex", "sdotbelow", "germandbls", "t", "tbar", "tcaron", "tdotbelow", "u", "uacute", "ubreve", "ucircumflex", "udieresis", "udotbelow", "ugrave", "uhungarumlaut", "umacron", "uni015F", "uni0163", "uni01C6", "uni01C9", "uni01CC", "uni01F3", "uni0219", "uni021B", "uogonek", "uring", "utilde", "v", "w", "wacute", "wcircumflex", "wdieresis", "wgrave", "x", "y", "yacute", "ycircumflex", "ydieresis", "ygrave", "ytilde", "z", "zacute", "zcaron", "zdotaccent", "zdotbelow", "c_t", "f_b", "f_f", "f_f_b", "f_f_h", "f_f_i", "f_f_j", "f_f_k", "f_f_l", "f_f_t", "f_h", "f_i", "f_j", "f_k", "f_l", "f_t", "s_t", ]
+
 # starter values
+mainMaxDescent = 0
+mainMaxDescentGlyph = ""
 maxDescent = 0
+mainMaxAscent = 0
+mainMaxAscentGlyph = ""
 maxAscent = 0
 
 # find highest and lowest point in font
 for glyph in font.glyphs:
+
+  # get total yMax and yMin, for win values
   for layer in glyph.layers:
-    
+  
     # get descender of current layer
     descent = layer.bounds.origin.y
     
@@ -25,13 +34,36 @@ for glyph in font.glyphs:
     # if descent/ascent of current layer is greater than previous max descents/ascents, update the max descent/ascent
     if descent <= maxDescent:
       maxDescent = descent
+      maxDescentGlyph = glyph.name
       
     if ascent >= maxAscent:
       maxAscent = ascent
+      maxAscentGlyph = glyph.name
+
+  # get maximums of only letters in list vars, for typo and hhea values
+  if glyph.name in caps or glyph.name in lowercase:
+    for layer in glyph.layers:
+      
+      # get descender of current layer
+      descent = layer.bounds.origin.y
+      
+      # get ascender of current layer
+      ascent = layer.bounds.size.height + descent  
+
+      # if descent/ascent of current layer is greater than previous max descents/ascents, update the max descent/ascent
+      if descent <= mainMaxDescent:
+        mainMaxDescent = descent
+        mainMaxDescentGlyph = glyph.name
+        
+      if ascent >= mainMaxAscent:
+        mainMaxAscent = ascent
+        mainMaxAscentGlyph = glyph.name
+
+
       
 
 # check values for sanity
-print(maxDescent, maxAscent)
+print(maxDescentGlyph, maxDescent, maxAscentGlyph, maxAscent)
 
 # make lineGap so that the total of `ascent + descent + lineGap` equals 120% of UPM size
 
@@ -39,42 +71,28 @@ UPM = font.upm
 
 totalSize = maxAscent + abs(maxDescent)
 
-lineGap = int((UPM * 1.2)) - totalSize
+# lineGap = int((UPM * 1.2)) - totalSize
 
-print(UPM, UPM * 1.2, totalSize, lineGap)
+# print(UPM, UPM * 1.2, totalSize, lineGap)
 
-# use highest/lowest points to set custom parameters for winAscent and winDescent
-# following vertical metric schema from https://github.com/googlefonts/gf-docs/tree/master/VerticalMetrics
+## use highest/lowest points to set custom parameters for winAscent and winDescent
+## following vertical metric schema from https://github.com/googlefonts/gf-docs/tree/master/VerticalMetrics
 for master in font.masters:
 
-  # Typo Ascender = either Cap Height or Ascender height, whichever is tallest
-  if master.ascender >= master.capHeight:
-    typoAscender = master.ascender
-  else:
-    typoAscender = master.capHeight
-  master.customParameters["typoAscender"] = typoAscender
-
-  # Typo Descender = Typo Ascender - UPM
-  typoDescender = typoAscender - UPM
-  master.customParameters["typoDescender"] = typoAscender - UPM
-  
-  # Typo LineGap = 0.25 * UPM
-  typoLineGap = 0.25 * UPM
+  typoLineGap = 0
   master.customParameters["typoLineGap"] = typoLineGap
-
-  # Hhea Ascender = Typo Ascender
-  master.customParameters["hheaAscender"] = typoAscender
-
-  # Hhea Descender = Typo Descender
-  master.customParameters["hheaDescender"] = typoDescender
-
-  # Hhea LineGap = Typo LineGap
   master.customParameters["hheaLineGap"] = typoLineGap
 
+  typoDescender = mainMaxDescent
+  master.customParameters["typoDescender"] = typoDescender
+  master.customParameters["hheaDescender"] = typoDescender
 
-  # Win Ascent = Font bbox yMax
+  typoAscender = mainMaxAscent
+  master.customParameters["typoAscender"] = typoAscender
+  master.customParameters["hheaAscender"] = typoAscender
+
+  # Win Ascent/Descent = Font bbox yMax/yMin
   master.customParameters["winAscent"] = maxAscent
-  # Win Descent = Font bbox yMin
   master.customParameters["winDescent"] = abs(maxDescent)
   
   
