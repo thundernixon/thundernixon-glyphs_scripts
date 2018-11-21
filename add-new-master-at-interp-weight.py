@@ -43,13 +43,11 @@ for i, instance in enumerate(f.instances):
         del f.instances[i]
 
 for i, master in enumerate(f.masters):
-    # prevent NoneType error in output by checking if master exists
-    if master:
-        # delete old master
-        if master.weightValue == oldMasterWeightValue:
-            print("delete " + str(master))
-            del f.masters[i]
-        # set new master value as old master value (round to nearest integer to match)
-        if round(master.weightValue) == round(newMasterWeightValue):
-            print("update weight value of " + str(master))
-            f.masters[i].weightValue = oldMasterWeightValue
+    # delete old master
+    if master.weightValue == oldMasterWeightValue:
+        print("delete " + str(master))
+        del f.masters[i]
+    # set new master value as old master value (round to nearest integer to match)
+    if round(master.weightValue) == round(newMasterWeightValue):
+        print("update weight value of " + str(master))
+        f.masters[i].weightValue = oldMasterWeightValue
