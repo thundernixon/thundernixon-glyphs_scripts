@@ -3,7 +3,7 @@
 __doc__="""
 If a ligature has no 'caret_1' anchors, this will add one in the horizontal middle, at the baseline.
 
-If run again, it will add subsequent `caret` anchors with a suffix of `_2`, `_3`, etc, adding 50 units each time.
+If run again, it will add subsequent `caret` anchors with a suffix of `_2`, `_3`, etc, adding 50 units each time to keep them from overlapping.
 
 You need to manually reposition added anchors to sensible positions.
 
@@ -32,6 +32,8 @@ if 'caret_1' not in currentAnchors:
     # set position of caret to (middle, 0)
     layer.anchors['caret_1'].position = NSPoint(middle, 0)
 
+    layer.anchors['caret_1'].selected = True
+
 else:
 
     carets = []
@@ -52,3 +54,5 @@ else:
     layer.anchors[newCaret].position = NSPoint(middle, 0)
     # increase vertical position by 50 units
     layer.anchors[newCaret].position = NSPoint(layer.anchors[newCaret].position.x + (unitsToMove * len(carets)), 0)
+
+    layer.anchors[newCaret].selected = True
