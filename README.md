@@ -2,11 +2,17 @@
 
 Repo of scripts for [Glyphs App](https://glyphsapp.com/)
 
-Scripts that are working go into the `master` branch. Git branch `wip` is a slightly-messy working area. 
+Scripts that are working go into the `master` branch. 
 
-## 🚨 Please note 
+Git branch `wip` is a slightly-messy working area. 
 
-These scripts are quick tools for working with fonts in progress. Most of the code is specific to my current work, and is not necessarily made to work with any arbitrary font file – please read and know what scripts will do before using them. Before using a script, please read the docstring for each script to know the what it does and if variables should be set inside the code before use. Where variables should be set before use, these lines of code are clearly commented.
+Note to self: pull in updates between branches with `git merge master --no-commit`, in order to review changes (especially deleted WIP scripts) before committing them. 
+
+## 🚨 Before using 🚨
+
+These scripts are quick tools for working with fonts in progress. Most of the code is specific to my current work, and is not necessarily made to work with any arbitrary font file. 
+
+Before using a script, please read (at minimum) the docstring for each script to know the what it does and if variables should be set inside the code before use. Where variables should be set before use, these lines of code are clearly commented. Always have backups of you work before running scripts that will edit data, and check results before saving. Ideally, read and know what entire scripts will do before using them.
 
 # More Information
 
