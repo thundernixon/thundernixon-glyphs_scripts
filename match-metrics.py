@@ -1,7 +1,9 @@
 #MenuTitle: Match Metrics
 # -*- coding: utf-8 -*-
 __doc__="""
-Matches metrics from one master to another
+Matches metrics from one master to another.
+
+To use, set variables in the script.
 """
 ####################################
 ############# set vars ############# 

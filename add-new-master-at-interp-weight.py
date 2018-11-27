@@ -1,7 +1,11 @@
 #MenuTitle: Adjust Master weight
 # -*- coding: utf-8 -*-
 __doc__="""
-Add new master at interpolated position, then delete existing master. Good for subtle adjustments in a build process. Set variables in script to configure.
+Add new master at interpolated position, then delete existing master. 
+
+Good for subtle adjustments in a build process. 
+
+Set variables in script to configure.
 """
 
 ### set vars ##########################
