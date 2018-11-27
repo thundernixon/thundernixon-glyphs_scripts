@@ -12,9 +12,5 @@ font = Glyphs.font
 for key, value in font.kerning.items():
     for key, value in font.kerning.items():
         print(value)
-        # if type(value) == float
         if type(value) == float:
             print(value)
-            # print(value)
-            # value = round(value)
-            # print(value)
