@@ -1,7 +1,13 @@
 #MenuTitle: Set Vertical Metric Params
 # -*- coding: utf-8 -*-
 __doc__="""
-  Assumes the masters keep the same vertical metrics. I am not sure whether winAscent and winDescent should be different between masters, otherwise, but you should check if that's the case before using this script on a font where min/max heights are different between styles. 
+  Assumes the masters keep the same vertical metrics. 
+  
+  I am not sure whether winAscent and winDescent should be different between masters, 
+  otherwise, but you should check if that's the case before using this script 
+  on a font where min/max heights are different between styles. 
+
+  Useful when created; may or may not match the latest Google Fonts vertical metrics standards. 
 """
 
 font = Glyphs.font
