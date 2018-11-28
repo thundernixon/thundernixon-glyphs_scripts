@@ -4,6 +4,8 @@ __doc__="""
 Separate a two-axis family into multiple weight-only Glyphs files.
 File separated based on Instance custom parameter `familyName`.
 Assumes a rectangular designspace. (?)
+
+Currently only splitting files and isolating associated instances. Not yet updating masters.
 """
 
 
@@ -94,92 +96,51 @@ for currentFamilyName in splitFamilies:
         indexCounter += 1
 
     currentFont.save(buildFilePath)
-    
-
-#     # make masters from each end of that instance for the current secondary axis
-#         # ~MAKE DEF ABOVE~ make master from instance makeMaster(instance, index) # 
-#             # get instance.interpolatedFont
-#             # f.masters.append(instanceFont.masters[index])
-#             # get new master ID
-#             # copy in glyphs
-#             # copy in kerning
 
 #     # assumes instances are ordered by weight value (this may need to be an added step above)
 
-    # currentBoldFont = currentFont.instances[-1].interpolatedFont
-    # print(currentBoldFont.fontMasters()[0].id)
-    # currentFont.masters.append(currentBoldFont.masters[0])
-    # currentBoldFontMasterID = currentBoldFont.fontMasters()[0].id
+    # def instanceToMaster(index):
+    #     # make an interpolated font of the new instance
+    #     instanceFont = currentFont.instances[index].interpolatedFont
+    #     # add the master of the interpolated font to the masters
+    #     currentFont.masters.append(instanceFont.masters[0])
+    #     # get the id from the master of the interpolated font
+    #     newMasterID = instanceFont.masters[0].id
 
-    # currentBoldFontMasterID = currentBoldFont.fontMasters()[0].id
-    # print(currentBoldFontMasterID)
+    #     for glyph in currentFont.glyphs:
+    #         # make variable for glyph of interpolated font
+    #         instanceGlyph = instanceFont.glyphs[glyph.name]
+    #         # bring glyph data into glyph of new master
+    #         glyph.layers[newMasterID] = instanceGlyph.layers[newMasterID]
 
-    # for glyph in currentFont.glyphs:
-    #     # make variable for glyph of interpolated font
-    #     currentBoldGlyph = currentBoldFont.glyphs[glyph.name]
-    #     # bring glyph data into glyph of new master
-    #     glyph.layers[currentBoldFontMasterID] = currentLightGlyph.layers[currentBoldFontMasterID]
+    #     # bring kerning in from interpolated font
+    #     # currentFont.kerning[newMasterID] = instanceFont.kerning[newMasterID]
 
-    
-
-    # currentFont.save(buildFilePath)
-
-    # # make an interpolated font of the new instance
-    # currentLightFont = currentFont.instances[0].interpolatedFont
-    
-    # print(currentLightFont.fontMasters()[0])
-    # print(currentLightFont.fontMasters()[0].id)
-    
-    # # add the master of the interpolated font to the masters
-    # currentFont.masters.append(currentLightFont.masters[0])
-
-    # # get the id from the master of the interpolated font
-    # currentLightFontMasterID = currentLightFont.fontMasters()[0].id
-    # print(currentLightFontMasterID)
-
-
-    # for glyph in currentFont.glyphs:
-    #     # make variable for glyph of interpolated font
-    #     currentLightGlyph = currentLightFont.glyphs[glyph.name]
-    #     # bring glyph data into glyph of new master
-    #     glyph.layers[currentLightFontMasterID] = currentLightGlyph.layers[currentLightFontMasterID]
+    # instanceToMaster(0)
+    # instanceToMaster(-1)
 
     # currentFont.save(buildFilePath)
 
-    # currentBoldFont = currentFont.instances[len(currentInstances)-1].interpolatedFont
-    # print(currentBoldFont.fontMasters()[0])
-    # print(currentBoldFont.fontMasters()[0].id)
+    # lenMasters = len(currentFont.masters)
+
+    # deleteCount = 0
+
+    # for index, master in enumerate(currentFont.masters):
+    #     # delete old master
+    #     print(index)
+    #     if index <= (lenMasters - 2 - 1):
+    #         print(deleteCount, index)
+    #         del currentFont.masters[deleteCount]
+            
+    #     print("--------------")
 
 
-    currentFont.close()
+    currentFont.save(buildFilePath)
 
-Glyphs.open("/Users/stephennixon/type-repos/google-font-repos/Encode-Sans/sources/build/Encode-Sans-SemiCondensed-build.glyphs", True)
+    # currentFont.close()
 
-#     currentLightFontMasterID = currentLightFont.fontMasters()[0].id()
-#     currentBoldFontMasterID = currentBoldFont.fontMasters()[0].id()
+# Glyphs.open("/Users/stephennixon/type-repos/google-font-repos/Encode-Sans/sources/build/Encode-Sans-SemiCondensed-build.glyphs", True)
 
-#     # currentFont.fontMasters().append(currentLightFont.fontMasters[0])
-#     # currentFont.fontMasters().append(currentBoldFont.fontMasters[0])
-#     # currentFont.insertFontMaster_atIndex_(currentLightFont.fontMasters()[0], 0)
-#     # currentFont.insertFontMaster_atIndex_(currentBoldFont.fontMasters()[0],1)
-#     currentFont.addFontMaster_(currentLightFont.fontMasters()[0])
-#     currentFont.addFontMaster_(currentBoldFont.fontMasters()[0])
-
-#     newLightMaster = currentFont.fontMasters()[-2]
-#     newBoldMaster = currentFont.fontMasters()[-1]
-#     newLightMasterID = newLightMaster.id()
-#     newBoldMasterID = newBoldMaster.id()
-
-#     for index,glyph in enumerate(currentFont.glyphs()):
-#         # make variable for glyph of interpolated font
-#         # currentGlyph = currentFont.glyphs()[glyph.name()]
-#         currentGlyph = currentFont.glyphs()[index]
-
-#         ## these need to be layer indexes, it seems
-#         # bring glyph data into glyph of new master
-#         glyph.layers()[newMasterID] = currentGlyph.layers()[currentLightFontMasterID]
-#         # bring glyph data into glyph of new master
-#         glyph.layers()[newMasterID] = currentGlyph.layers()[currentBoldFontMasterID]
 
 #     # delete previous masters
 #         # for index, master in enumerate(masters):
@@ -199,22 +160,6 @@ Glyphs.open("/Users/stephennixon/type-repos/google-font-repos/Encode-Sans/source
 # ## assuming there aren't middle masters for weight
 
 # # get lightest and boldest masters
-
-# #  
-
-
-# # for instance in font.instances():
-# #     for param in instance.customParameters():
-# #         print(param)
-# #     # print(instance.customParameters)
-# #     print(instance.interpolatedFont)
-#     # print(instance.interpolatedFont().font().fontMasters()[0].name())
-#     # if re.match('^Light$', instance.name()) != None or re.match('^Black$', instance.name()) != None:
-#     #     print(instance.interpolatedFont().font().fontMasters()[0].name())
-#     #     font.addFontMaster_(instance.interpolatedFont().font().fontMasters()[0])
-
-# # for master in font.fontMasters():
-# #    print(master.name())
 
 
 # font.save((str(directory + "/" + filename)))
