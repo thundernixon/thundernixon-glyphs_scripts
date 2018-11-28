@@ -41,16 +41,16 @@ splitFamilies = set(splitFamilies)
 print(splitFamilies)
 
 parentFilePath = os.path.split(font.filepath)[0]
-buildPath = parentFilePath + "/build"
+buildPath = parentFilePath + "/split"
 
 if os.path.exists(buildPath) == False:
     os.mkdir(buildPath)
 
 # # make new glyph font doc for each familyName in list
 for currentFamilyName in splitFamilies:
-    buildFileName = currentFamilyName.replace(" ", "-") + "-build.glyphs"
+    buildFileName = currentFamilyName.replace(" ", "-") + "-split.glyphs"
     
-    buildFilePath = os.path.split(font.filepath)[0] + "/build/" + buildFileName
+    buildFilePath = os.path.split(font.filepath)[0] + "/split/" + buildFileName
 
     print(buildFileName)
     print(buildFilePath)
