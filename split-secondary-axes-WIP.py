@@ -46,9 +46,6 @@ if os.path.exists(buildPath) == False:
 
 # # make new glyph font doc for each familyName in list
 for currentFamilyName in splitFamilies:
-
-    
-
     buildFileName = currentFamilyName.replace(" ", "-") + "-build.glyphs"
     
     buildFilePath = os.path.split(font.filepath)[0] + "/build/" + buildFileName
@@ -57,8 +54,7 @@ for currentFamilyName in splitFamilies:
     print(buildFilePath)
     font.save((buildFilePath))
 
-
-    currentFont = Glyphs.open((buildFilePath), False)
+    currentFont = Glyphs.open((buildFilePath), True)
 
 #     # TODO: make currentFont family name = currentFamilyName
 
@@ -97,7 +93,8 @@ for currentFamilyName in splitFamilies:
         
         indexCounter += 1
 
-    currentFont.save((buildFilePath))
+    currentFont.save(buildFilePath)
+    
 
 #     # make masters from each end of that instance for the current secondary axis
 #         # ~MAKE DEF ABOVE~ make master from instance makeMaster(instance, index) # 
@@ -109,11 +106,54 @@ for currentFamilyName in splitFamilies:
 
 #     # assumes instances are ordered by weight value (this may need to be an added step above)
 
-#     currentLightFont = currentFont.generateInstance_error_(currentFont.instances()[0], None)
-#     currentBoldFont = currentFont.generateInstance_error_(currentFont.instances()[-1], None)
+    # currentBoldFont = currentFont.instances[-1].interpolatedFont
+    # print(currentBoldFont.fontMasters()[0].id)
+    # currentFont.masters.append(currentBoldFont.masters[0])
+    # currentBoldFontMasterID = currentBoldFont.fontMasters()[0].id
 
-#     print(currentLightFont.fontMasters()[0])
-#     print(currentBoldFont.fontMasters()[0])
+    # currentBoldFontMasterID = currentBoldFont.fontMasters()[0].id
+    # print(currentBoldFontMasterID)
+
+    # for glyph in currentFont.glyphs:
+    #     # make variable for glyph of interpolated font
+    #     currentBoldGlyph = currentBoldFont.glyphs[glyph.name]
+    #     # bring glyph data into glyph of new master
+    #     glyph.layers[currentBoldFontMasterID] = currentLightGlyph.layers[currentBoldFontMasterID]
+
+    
+
+    # currentFont.save(buildFilePath)
+
+    # # make an interpolated font of the new instance
+    # currentLightFont = currentFont.instances[0].interpolatedFont
+    
+    # print(currentLightFont.fontMasters()[0])
+    # print(currentLightFont.fontMasters()[0].id)
+    
+    # # add the master of the interpolated font to the masters
+    # currentFont.masters.append(currentLightFont.masters[0])
+
+    # # get the id from the master of the interpolated font
+    # currentLightFontMasterID = currentLightFont.fontMasters()[0].id
+    # print(currentLightFontMasterID)
+
+
+    # for glyph in currentFont.glyphs:
+    #     # make variable for glyph of interpolated font
+    #     currentLightGlyph = currentLightFont.glyphs[glyph.name]
+    #     # bring glyph data into glyph of new master
+    #     glyph.layers[currentLightFontMasterID] = currentLightGlyph.layers[currentLightFontMasterID]
+
+    # currentFont.save(buildFilePath)
+
+    # currentBoldFont = currentFont.instances[len(currentInstances)-1].interpolatedFont
+    # print(currentBoldFont.fontMasters()[0])
+    # print(currentBoldFont.fontMasters()[0].id)
+
+
+    currentFont.close()
+
+Glyphs.open("/Users/stephennixon/type-repos/google-font-repos/Encode-Sans/sources/build/Encode-Sans-SemiCondensed-build.glyphs", True)
 
 #     currentLightFontMasterID = currentLightFont.fontMasters()[0].id()
 #     currentBoldFontMasterID = currentBoldFont.fontMasters()[0].id()
