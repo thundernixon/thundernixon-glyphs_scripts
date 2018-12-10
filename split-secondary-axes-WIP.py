@@ -6,6 +6,14 @@ File separated based on Instance custom parameter `familyName`.
 Assumes a rectangular designspace. (?)
 
 Currently only splitting files and isolating associated instances. Not yet updating masters.
+
+TODO: only try to make instances into masters where they *do not* match existing master values.
+E.g. in Encode Sans Condensed, simply delete Extended masters, 
+but in Encode Sans Extended, only delete Condensed masters,
+but in between, move interpolated instances into new masters, then delete old ones.
+
+TODO: also update the extreme master names (new masters take on extreme instance names, 
+and also the split masters shouldn't have width names)
 """
 
 
@@ -58,7 +66,8 @@ for currentFamilyName in splitFamilies:
 
     currentFont = Glyphs.open((buildFilePath), True)
 
-#     # TODO: make currentFont family name = currentFamilyName
+    # make currentFont family name = currentFamilyName
+    currentFont.familyName = currentFamilyName
 
 #     # make list of current instances, delete others
     currentInstances = []
