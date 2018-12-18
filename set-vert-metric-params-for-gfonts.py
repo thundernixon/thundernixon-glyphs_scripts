@@ -46,24 +46,26 @@ for glyph in font.glyphs:
       maxAscent = ascent
       maxAscentGlyph = glyph.name
 
-  # get maximums of only letters in list vars, for typo and hhea values
-  if glyph.name in caps or glyph.name in lowercase:
-    for layer in glyph.layers:
+  # get descender of current layer
+  descent = layer.bounds.origin.y
       
-      # get descender of current layer
-      descent = layer.bounds.origin.y
-      
-      # get ascender of current layer
-      ascent = layer.bounds.size.height + descent  
+  # get ascender of current layer (total height of layer, subtracting value of descender)
+  ascent = layer.bounds.size.height + descent
 
+  # get maximums of only letters in list vars, for typo and hhea values
+  if glyph.name in caps:
+
+    for layer in glyph.layers:
+      if ascent >= mainMaxAscent:
+        mainMaxAscent = ascent
+        mainMaxAscentGlyph = glyph.name
+
+
+  if glyph.name in lowercase:
       # if descent/ascent of current layer is greater than previous max descents/ascents, update the max descent/ascent
       if descent <= mainMaxDescent:
         mainMaxDescent = descent
         mainMaxDescentGlyph = glyph.name
-        
-      if ascent >= mainMaxAscent:
-        mainMaxAscent = ascent
-        mainMaxAscentGlyph = glyph.name
 
 
       
