@@ -18,10 +18,12 @@ for glyph in font.glyphs:
         print(glyph.name)
         rootName = glyph.name.replace(smallCapSuffix, "").lower()
 
-        print(rootName)
+        
 
         if rootName in font.glyphs:
             del font.glyphs[rootName]
+            print(glyph.name + " -> " + rootName)
+            print"-----------------------------")
         else:
             "no non-smallcap version of " + glyph.name
 
@@ -31,9 +33,15 @@ for glyph in font.glyphs:
 
         glyph.name = rootName
 
-        for i, component in enumerate(layer.components):
-            if smallCapSuffix in component.name:
-                component.name = rootName
+        for layer in glyph.layers:
+            for i, component in enumerate(layer.components):
+                if smallCapSuffix in component.name:
+                    component.name = rootName
+                elif component.name == "dotlessi":
+                    component.name = rootName
+                else:
+                    print("could not replace " + component.name)
+                    print("it is probably a special case and may need to be added to the component-replacing code")
 
 
 # make sure kerning is preserved
@@ -44,6 +52,8 @@ for glyph in font.glyphs:
 # make sure component glyphs are taken care of
     # correct components
     # correct placement
+
+# make sure unicodes are set
 
 # fontPath = font.filepath
 # font.save((str(fontPath.replace(".glyphs","-sc.glyphs"))))
