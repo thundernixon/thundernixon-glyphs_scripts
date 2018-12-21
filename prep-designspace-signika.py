@@ -1,1 +1,1 @@
-/Users/stephennixon/type-repos/google-font-repos/signika-for-google/sources/scripts/helpers/prep-designspace.py
+/Users/stephennixon/type-repos/google-font-repos/signika-for-google/sources/scripts/helpers/prep-designspace-glyphs_script.py
