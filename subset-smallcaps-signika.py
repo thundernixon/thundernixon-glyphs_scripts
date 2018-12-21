@@ -1,4 +1,4 @@
-#MenuTitle: Subset Smallcaps for Gfonts
+#MenuTitle: Subset Signika Smallcaps for Gfonts
 # -*- coding: utf-8 -*-
 __doc__="""
 Make a separate glyphs file that replaces lowercase glyphs with small caps, for exporting via FontMake.
