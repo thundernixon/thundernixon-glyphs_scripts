@@ -99,7 +99,9 @@ for index, instance in enumerate(font.instances):
 
 # make sure opentype features still work
 
-# fontPath = font.filepath
-# scSavePath = str(fontPath.replace(".glyphs","-sc.glyphs"))
-# font.save(scSavePath)
-# document.close(True)
+fontPath = font.filepath
+scSavePath = str(fontPath.replace(".glyphs","-sc.glyphs"))
+font.save(scSavePath)
+font.close()
+
+Glyphs.open(scSavePath)
