@@ -1,0 +1,1 @@
+/Users/stephennixon/type-repos/google-font-repos/Encode-Sans/sources/scripts/helpers/copy-anchors-between-masters-glyphs_script.py

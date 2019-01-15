@@ -1,0 +1,1 @@
+/Users/stephennixon/type-repos/google-font-repos/Encode-Sans/sources/scripts/helpers/copy-accents-case-to-sc-glyphs_script.py

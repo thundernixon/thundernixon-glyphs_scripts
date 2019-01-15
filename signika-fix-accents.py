@@ -1,0 +1,1 @@
+/Users/stephennixon/type-repos/google-font-repos/signika-for-google/sources/scripts/helpers/signika-fix-accents.py
