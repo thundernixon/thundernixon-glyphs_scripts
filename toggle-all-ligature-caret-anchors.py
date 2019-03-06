@@ -11,7 +11,11 @@ font = Glyphs.font
 for glyph in font.glyphs:
     for layer in glyph.layers:
         for anchor in layer.anchors:
-            if "caret" in anchor.name:
+            # if "caret" in anchor.name:
+                # print glyph.name, anchor
+                # anchor.name = anchor.name.replace("caret", "lig_carrot_temp_off")
+                # print glyph.name, anchor
+            if "carrot" in anchor.name:
                 print glyph.name, anchor
-                anchor.name = anchor.name.replace("caret", "lig_carrot_temp_off")
+                anchor.name = anchor.name.replace("lig_carrot_temp_off", "caret")
                 print glyph.name, anchor
